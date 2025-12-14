@@ -18,3 +18,7 @@
 
 #### 5. 리버스쉘 연결 대기 및 bypass.c 실행으로 쉘 획득
 <img width="624" height="205" alt="image" src="https://github.com/user-attachments/assets/5dee1408-c256-4d3e-8f04-a09fe1afb328" />
+<br><br>
+
+## Demo
+![2025-12-14 22-29-54 (2)](https://github.com/user-attachments/assets/7a26dced-5c8b-499b-a87d-5dcbdf1a8656)
