@@ -1,3 +1,32 @@
+## 함수 포인터
+함수 포인터는 함수의 주소를 저장하는 포인터입니다.
+
+YARA 룰과 같이 정적 탐지에서는 시그니처, 코드 구조, 공격에 자주 사용되는 함수 등을 탐지합니다.
+
+악성코드에는 필수적으로 사용되는 여러 Windows API들이 존재하며, 대표적으로 VirtualAlloc, CreateThread 등이 있습니다.
+
+Windows API들을 소스코드에서 사용하면 IAT Table에 관련된 모듈과 함수를 호출한 기록이 남게 되며, YARA 룰에도 즉시 걸리게 됩니다.
+
+<img width="696" height="288" alt="3" src="https://github.com/user-attachments/assets/a2a669f3-e4e5-4d69-a33c-79cc0470c691" />
+
+
+이러한 정적 탐지를 우회하기 위한 방법 중 하나로 함수 포인터의 사용은 IAT Table에 사용한 Windows API 흔적을 남기지 않으며
+
+단어를 조각내서 사용하거나, 연관 없는 변수 명을 사용한다면 시그니처 탐지도 회피 할 수 있습니다.
+
+---
+
+<img width="925" height="157" alt="4" src="https://github.com/user-attachments/assets/3045ef40-39af-4864-9c53-c24ba5078dfe" />
+
+Windows API 함수를 직접 호출하여 VirtualAlloc 사용
+
+<img width="936" height="478" alt="5" src="https://github.com/user-attachments/assets/734883a9-0338-42a8-91dd-8448f7be38dc" />
+
+함수 포인터를 통해 간접적으로 VirtualAlloc 사용
+
+
+<br><br>
+
 ## 사용 가이드
 
 #### 1. msfvenom을 통한 바이트 코드 생성
@@ -21,4 +50,5 @@
 <br><br>
 
 ## Demo
+
 ![2025-12-14 22-29-54 (2)](https://github.com/user-attachments/assets/7a26dced-5c8b-499b-a87d-5dcbdf1a8656)
