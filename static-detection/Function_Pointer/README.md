@@ -5,7 +5,7 @@ YARA 룰과 같이 정적 탐지에서는 시그니처, 코드 구조, 공격에
 
 악성코드에는 필수적으로 사용되는 여러 Windows API들이 존재하며, 대표적으로 VirtualAlloc, CreateThread 등이 있습니다.
 
-Windows API들을 소스코드에서 사용하면 IAT Table에 관련된 모듈과 함수를 호출한 기록이 남게 되며, YARA 룰에도 즉시 걸리게 됩니다.
+Windows API들을 소스코드에서 사용하면 IAT에 관련된 모듈과 함수를 호출한 기록이 남게 되며, YARA 룰에도 즉시 걸리게 됩니다.
 
 <img width="696" height="288" alt="3" src="https://github.com/user-attachments/assets/a2a669f3-e4e5-4d69-a33c-79cc0470c691" />
 
@@ -52,3 +52,4 @@ Windows API 함수를 직접 호출하여 VirtualAlloc 사용
 ## Demo
 
 ![2025-12-14 22-29-54 (2)](https://github.com/user-attachments/assets/7a26dced-5c8b-499b-a87d-5dcbdf1a8656)
+
